@@ -1,0 +1,11 @@
+{
+    "welcome-back": "Welcome back",
+    "Project": "Project",
+    "Analytics": "Analytics",
+
+    "pages": {
+        "policies": {
+            "header": "My Policies"
+        }
+    }
+}

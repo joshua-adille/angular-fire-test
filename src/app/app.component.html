@@ -1,0 +1,24 @@
+<!-- <router-outlet></router-outlet> -->
+
+<!-- <ul>
+    <li *ngFor="let note of notes$ | async">
+        {{ note | json }}
+        Key: {{ note.key }}, Value: {{ note.description }}
+        {{ note.description }}
+        {{ note.description }}
+    </li>
+</ul> -->
+
+<h3 *ngFor="let note of notes$ | async">
+    <b>{{ note.description }}</b>
+</h3>
+
+<!-- <ng-container *ngFor="let note of notes$ | async">
+    {{ note | json }}
+     Key: {{ note.key }}, Value: {{ note.description }}
+        {{ note.description }} -->
+<!-- </ng-container> -->
+
+<!-- <h1 *ngFor="let note of notes">
+    <b>{{ note.description }}</b>
+</h1> -->
