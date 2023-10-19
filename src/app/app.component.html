@@ -10,8 +10,15 @@
 </ul> -->
 <h1>Todo App</h1>
 <br />
+
+<input type="text" class="todo-input" placeholder="Enter task" #newNote />
+<button class="add-button" (click)="addNotes(newNote.value)">Add Note</button>
+
 <h3 *ngFor="let note of notes">
     <b>* {{ note.description }} <br /></b>
+    <button class="delete-button" (click)="deleteNotes(note.id)">
+        Delete Note
+    </button>
 </h3>
 
 <!-- <ng-container *ngFor="let note of notes$ | async">
