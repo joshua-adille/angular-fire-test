@@ -10,6 +10,7 @@ import {
 import { RouterOutlet } from '@angular/router';
 import { DocumentData } from 'rxfire/firestore/interfaces';
 import { Observable } from 'rxjs';
+import { SharedService } from './shared.service';
 
 interface Item {
     name: string;
@@ -23,5 +24,16 @@ interface Item {
     imports: [RouterOutlet, CommonModule],
 })
 export class AppComponent {
-    constructor() {}
+    constructor(private service: SharedService) {}
+    notes: any = [];
+
+    refreshNotes() {
+        this.service.getNotes().subscribe((res) => {
+            this.notes = res;
+        });
+    }
+
+    ngOnInit() {
+        this.refreshNotes();
+    }
 }
