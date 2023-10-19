@@ -38,22 +38,37 @@ export class AppComponent {
     }
 
     addNotes(newNotes: string) {
-        this.service.addNote(newNotes).then((res) => {
-            console.log(res);
-            this.refreshNotes();
-        });
+        this.service
+            .addNote(newNotes)
+            .then((res) => {
+                console.log(res);
+                this.refreshNotes();
+            })
+            .catch((error) => {
+                console.log(`There was an error! ${error}`);
+            });
     }
     deleteNotes(id: string) {
-        this.service.deleteNote(id).then((res) => {
-            console.log(res);
-            this.refreshNotes();
-        });
+        this.service
+            .deleteNote(id)
+            .then((res) => {
+                console.log(res);
+                this.refreshNotes();
+            })
+            .catch((error) => {
+                console.log(`There was an error! ${error}`);
+            });
     }
     updateNotes(editNotes: string, id: string) {
         // debugger;
-        this.service.updateNote(editNotes, id).then((res) => {
-            console.log(res);
-            this.refreshNotes();
-        });
+        this.service
+            .updateNote(editNotes, id)
+            .then((res) => {
+                console.log(res);
+                this.refreshNotes();
+            })
+            .catch((error) => {
+                console.log(`There was an error! ${error}`);
+            });
     }
 }
