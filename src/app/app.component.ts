@@ -49,4 +49,11 @@ export class AppComponent {
             this.refreshNotes();
         });
     }
+    updateNotes(editNotes: string, id: string) {
+        // debugger;
+        this.service.updateNote(editNotes, id).then((res) => {
+            console.log(res);
+            this.refreshNotes();
+        });
+    }
 }

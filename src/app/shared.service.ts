@@ -6,6 +6,7 @@ import {
     collection,
     collectionData,
     deleteDoc,
+    updateDoc,
 } from '@angular/fire/firestore';
 
 @Injectable({
@@ -25,5 +26,10 @@ export class SharedService {
     deleteNote(id: string) {
         let docRef = doc(this.fs, 'notes/' + id);
         return deleteDoc(docRef);
+    }
+    updateNote(desc: string, id: string) {
+        let data = { description: desc };
+        let notesCollection = doc(this.fs, 'notes/' + id);
+        return updateDoc(notesCollection, data);
     }
 }
