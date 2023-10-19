@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
      * Constructor
      */
     constructor() {
-        const itemCollection = collection(this.firestore, 'items');
+        const itemCollection = collection(this.firestore, 'notes');
         // // console.log(collectionData(itemCollection));
         collectionData(itemCollection).subscribe((xs) => {
             console.log(

@@ -8,9 +8,10 @@
         {{ note.description }}
     </li>
 </ul> -->
-
+<h1>Todo App</h1>
+<br />
 <h3 *ngFor="let note of notes$ | async">
-    <b>{{ note.description }}</b>
+    <b>* {{ note.description }} <br /></b>
 </h3>
 
 <!-- <ng-container *ngFor="let note of notes$ | async">
