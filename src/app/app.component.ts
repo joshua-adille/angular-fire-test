@@ -36,4 +36,17 @@ export class AppComponent {
     ngOnInit() {
         this.refreshNotes();
     }
+
+    addNotes(newNotes: string) {
+        this.service.addNote(newNotes).then((res) => {
+            console.log(res);
+            this.refreshNotes();
+        });
+    }
+    deleteNotes(id: string) {
+        this.service.deleteNote(id).then((res) => {
+            console.log(res);
+            this.refreshNotes();
+        });
+    }
 }
