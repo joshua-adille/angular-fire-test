@@ -77,23 +77,17 @@ export class AppComponent {
                 console.log(`There was an error! ${error}`);
             });
     }
-    updateCategories() {
-        // const categoryType = this.category.find((item) => {
-        //     this.category.id === this.selectedCategory;
-        // });
-        // console.log(this.selectedCategory);
-
-        if (this.selectedCategory) {
-            // You can access the selected item's type here
-            const selectedItem = this.category.find(
-                (item) => item.id === this.selectedCategory
-            );
-            if (selectedItem) {
-                const selectedType = selectedItem.type;
-                console.log('Selected Type: ', selectedType);
-            }
-        } else {
-            console.log('No category selected');
-        }
+    updateCategories(choice: string, id: string) {
+        // debugger;
+        // console.log('Clicked!', choice, id);
+        this.service
+            .updateCategory(choice, id)
+            .then((res) => {
+                console.log(res);
+                this.refreshNotes();
+            })
+            .catch((error) => {
+                console.log(`There was an error! ${error}`);
+            });
     }
 }

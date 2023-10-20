@@ -1,13 +1,4 @@
 <!-- <router-outlet></router-outlet> -->
-
-<!-- <ul>
-    <li *ngFor="let note of notes$ | async">
-        {{ note | json }}
-        Key: {{ note.key }}, Value: {{ note.description }}
-        {{ note.description }}
-        {{ note.description }}
-    </li>
-</ul> -->
 <h1>Todo App</h1>
 <br />
 
@@ -16,7 +7,7 @@
 
 <h3 *ngFor="let note of notes">
     <b>* {{ note.description }} <br /></b>
-    <p class="categ">Category: {{ note.category }}</p>
+    <p class="categ">Category: {{ note.type }}</p>
     <div>
         <input
             type="text"
@@ -36,10 +27,10 @@
     </button>
 
     <select
+        #choice
         name="category"
         id="category"
-        [(ngModel)]="selectedCategory"
-        (change)="updateCategories()"
+        (change)="updateCategories(choice.options[choice.value].text, note.id)"
     >
         <option [value]="" disabled selected>Select Category</option>
         <!-- <option value="option1">test1</option>
