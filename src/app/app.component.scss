@@ -58,3 +58,18 @@
         border-color: #2980b9;
     }
 }
+
+// Style for the select element
+select {
+    width: 20%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+// Style for the "Nothing selected yet" option
+select option[disabled]:first-child {
+    color: #999; // Change the color to a grayish tone
+}

@@ -33,6 +33,13 @@
     <button class="delete-button" (click)="deleteNotes(note.id)">
         Delete Note
     </button>
+
+    <select name="category" id="category">
+        <option value="" disabled selected>Select Category</option>
+        <option value="option1">test1</option>
+        <option value="option2">test2</option>
+        <option value="option3">test3</option>
+    </select>
 </h3>
 
 <!-- <ng-container *ngFor="let note of notes$ | async">
