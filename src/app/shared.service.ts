@@ -32,4 +32,8 @@ export class SharedService {
         let notesCollection = doc(this.fs, 'notes/' + id);
         return updateDoc(notesCollection, data);
     }
+    getCategory() {
+        let notesCollection = collection(this.fs, 'category');
+        return collectionData(notesCollection, { idField: 'id' });
+    }
 }

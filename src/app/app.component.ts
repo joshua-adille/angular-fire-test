@@ -26,6 +26,7 @@ interface Item {
 export class AppComponent {
     constructor(private service: SharedService) {}
     notes: any = [];
+    category: any = [];
 
     refreshNotes() {
         this.service.getNotes().subscribe((res) => {
@@ -33,8 +34,15 @@ export class AppComponent {
         });
     }
 
+    getCategories() {
+        this.service.getCategory().subscribe((res) => {
+            this.category = res;
+        });
+    }
+
     ngOnInit() {
         this.refreshNotes();
+        this.getCategories();
     }
 
     addNotes(newNotes: string) {
