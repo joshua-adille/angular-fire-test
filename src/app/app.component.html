@@ -7,7 +7,12 @@
 
 <h3 *ngFor="let note of notes">
     <b>* {{ note.description }} <br /></b>
-    <p class="categ">Category: {{ note.type }}</p>
+    <!-- <p class="categ">Category: {{ note.type }}</p> -->
+
+    <p class="categ">
+        Category: <span *ngIf="note.type; else noneText">{{ note.type }}</span>
+    </p>
+    <ng-template #noneText>none</ng-template>
     <div>
         <input
             type="text"
