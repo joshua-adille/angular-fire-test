@@ -36,9 +36,12 @@
 
     <select name="category" id="category">
         <option value="" disabled selected>Select Category</option>
-        <option value="option1">test1</option>
+        <!-- <option value="option1">test1</option>
         <option value="option2">test2</option>
-        <option value="option3">test3</option>
+        <option value="option3">test3</option> -->
+        <option *ngFor="let item of category" value="{{ item.id }}">
+            {{ item.type }}
+        </option>
     </select>
 </h3>
 
