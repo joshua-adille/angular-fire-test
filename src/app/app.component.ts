@@ -11,10 +11,7 @@ import { RouterOutlet } from '@angular/router';
 import { DocumentData } from 'rxfire/firestore/interfaces';
 import { Observable } from 'rxjs';
 import { SharedService } from './shared.service';
-
-interface Item {
-    name: string;
-}
+import { json } from 'stream/consumers';
 
 @Component({
     selector: 'app-root',
@@ -27,6 +24,7 @@ export class AppComponent {
     constructor(private service: SharedService) {}
     notes: any = [];
     category: any = [];
+    selectedCategory: string;
 
     refreshNotes() {
         this.service.getNotes().subscribe((res) => {
@@ -78,5 +76,24 @@ export class AppComponent {
             .catch((error) => {
                 console.log(`There was an error! ${error}`);
             });
+    }
+    updateCategories() {
+        // const categoryType = this.category.find((item) => {
+        //     this.category.id === this.selectedCategory;
+        // });
+        // console.log(this.selectedCategory);
+
+        if (this.selectedCategory) {
+            // You can access the selected item's type here
+            const selectedItem = this.category.find(
+                (item) => item.id === this.selectedCategory
+            );
+            if (selectedItem) {
+                const selectedType = selectedItem.type;
+                console.log('Selected Type: ', selectedType);
+            }
+        } else {
+            console.log('No category selected');
+        }
     }
 }

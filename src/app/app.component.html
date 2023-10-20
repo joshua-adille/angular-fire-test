@@ -35,8 +35,13 @@
         Delete Note
     </button>
 
-    <select name="category" id="category" [(ngModel)]="selectedCategory">
-        <option value="" disabled selected>Select Category</option>
+    <select
+        name="category"
+        id="category"
+        [(ngModel)]="selectedCategory"
+        (change)="updateCategories()"
+    >
+        <option [value]="" disabled selected>Select Category</option>
         <!-- <option value="option1">test1</option>
         <option value="option2">test2</option>
         <option value="option3">test3</option> -->
