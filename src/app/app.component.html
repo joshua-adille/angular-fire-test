@@ -1,24 +1,27 @@
 <!-- <router-outlet></router-outlet> -->
 
-<!-- <ul>
-    <li *ngFor="let note of notes$ | async">
-        {{ note | json }}
-        Key: {{ note.key }}, Value: {{ note.description }}
-        {{ note.description }}
-        {{ note.description }}
-    </li>
-</ul> -->
+<h1>Hello World</h1>
 
-<h3 *ngFor="let note of notes$ | async">
-    <b>{{ note.description }}</b>
-</h3>
+<!-- <div *ngIf="data$ | async as data">
+    <div *ngFor="let user of data.users">
+        {{ user.name }}
+    </div>
+    ~~~~~~~~~~
+    <div *ngFor="let username of data.usernames">
+        {{ username }}
+    </div>
+    ~~~~~~~~~~
+    <div *ngFor="let user of data.filteredUsers">
+        {{ user.name }}
+    </div>
+</div> -->
 
-<!-- <ng-container *ngFor="let note of notes$ | async">
-    {{ note | json }}
-     Key: {{ note.key }}, Value: {{ note.description }}
-        {{ note.description }} -->
-<!-- </ng-container> -->
+{{ datas$ | async | json }}
 
-<!-- <h1 *ngFor="let note of notes">
-    <b>{{ note.description }}</b>
-</h1> -->
+<!-- <div *ngFor="let user of users$ | async"> -->
+<!-- {{ user.name }} -->
+<!-- </div> -->
+
+<!-- <div *ngIf="user$ | async as user">
+    {{ user.name }}
+</div> -->

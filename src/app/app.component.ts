@@ -1,19 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
-import {
-    Firestore,
-    collection,
-    collectionData,
-    getDocs,
-    query,
-} from '@angular/fire/firestore';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { DocumentData } from 'rxfire/firestore/interfaces';
-import { Observable } from 'rxjs';
-
-interface Item {
-    name: string;
-}
+import {
+    map,
+    of,
+    filter,
+    BehaviorSubject,
+    fromEvent,
+    combineLatest,
+    tap,
+} from 'rxjs';
 
 @Component({
     selector: 'app-root',
@@ -22,85 +18,65 @@ interface Item {
     standalone: true,
     imports: [RouterOutlet, CommonModule],
 })
-export class AppComponent implements OnInit {
-    private firestore: Firestore = inject(Firestore);
-    notes$: Observable<DocumentData[]>;
-    xs: Array<number>;
-    // notes$: Observable<DocumentData[]>;
-    // notes$: DocumentData = [];
+export class AppComponent {
+    users = [
+        { id: '1', name: 'John', isActive: true },
+        { id: '2', name: 'Jack', isActive: true },
+        { id: '3', name: 'Mike', isActive: false },
+    ];
 
-    /**
-     * Constructor
-     */
-    constructor() {
-        const itemCollection = collection(this.firestore, 'items');
-        // // console.log(collectionData(itemCollection));
-        collectionData(itemCollection).subscribe((xs) => {
-            console.log(
-                '[debug] this is the xs observable: ',
-                xs,
-                '[of type]: ',
-                typeof xs
-            );
-        });
-        this.notes$ = collectionData(itemCollection);
+    users$ = of(this.users);
+    usernames$ = this.users$.pipe(
+        map((users) => users.map((user) => user.name))
+    );
 
-        // this.notes$.subscribe((data) => {
-        //     console.log(data);
-        // });
-        //  console.log(this.notes$, 'this is notes');
-        // this.notes$.subscribe((data) => {
-        //     console.log(data);
-        // });
-        // // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        // const collectionRef = collection(this.firestore, 'items');
-        // const collectionQuery = query(
-        //     collectionRef
-        //     //   where('profileId', '==', profileId),
-        //     //   where('status', 'in', orderStatuses)
-        // );
-        // this.notes = collectionData(collectionQuery, { idField: 'id' });
-        // collectionData(collectionQuery).subscribe((xs) => {
-        //     console.log(
-        //         '[debug] this is the xs observable: ',
-        //         xs,
-        //         '[of type]: ',
-        //         typeof xs
-        //     );
-        //     this.notes = xs;
-        //     // this.notes = xs;
-        // });
-    }
+    filteredUsers$ = this.users$.pipe(
+        filter((users) => users.every((user) => user.isActive))
+    );
+
+    // documentClick$ = fromEvent(document, 'click');
+    datas$ = combineLatest([
+        this.users$,
+        this.usernames$,
+        this.filteredUsers$,
+    ]).pipe(
+        map(([users, usernames, filteredUsers]) => ({
+            users,
+            usernames,
+            filteredUsers,
+        }))
+    );
+
+    // data$ = combineLatest([
+    //     this.users$,
+    //     this.usernames$,
+    //     this.filteredUsers$,
+    // ]).pipe(
+    //     tap(([users, usernames, filteredUsers]) => {
+    //         debugger;
+    //         console.log('Users:', users);
+    //         console.log('Usernames:', usernames);
+    //         console.log('Filtered Users:', filteredUsers);
+    //     }),
+    //     map(([users, usernames, filteredUsers]) => ({
+    //         users,
+    //         usernames,
+    //         filteredUsers,
+    //     }))
+    // );
     ngOnInit() {
-        // console.log(
-        //     '[debug] this is the notes array: ',
-        //     this.notes,
-        //     '[of type]: ',
-        //     typeof this.notes
-        // );
-        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        // const collectionRef = collection(this.firestore, 'notes');
-        // // this.notes$ = collectionData(collectionRef);
-        // // // const collectionQuery = query(
-        // // //     collectionRef
-        // // //     //   where('profileId', '==', profileId),
-        // // //     //   where('status', 'in', orderStatuses)
-        // // // );
-        // // return console.log((this.notes$ = data));
-        // collectionData(collectionRef).subscribe((xs) => {
-        //     console.log(
-        //         '[debug] this is the xs observable: ',
-        //         xs,
-        //         '[of type]: ',
-        //         typeof xs
-        //     );
-        //     this.notes$ = xs;
+        // console.log('data$', this.data$);
+        // this.documentClick$.subscribe((e) => {
+        //     console.log('e', e);
         // });
-        // console.log(
-        //     '[debug] this is the notes array: ',
-        //     this.notes$,
-        //     '[of type]: ',
-        //     typeof this.notes$
-        // );
+        // setTimeout(() => {
+        //     this.user$.next({ id: '1', name: 'John' });
+        // }, 2000);
+        // this.user$.subscribe((user) => {
+        //     console.log('user', user);
+        // });
+        // this.users$.subscribe((users) => {
+        //     console.log('users', users);
+        // });
     }
 }
