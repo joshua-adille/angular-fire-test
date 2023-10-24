@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { debug } from 'console';
 import {
     map,
     of,
@@ -30,16 +31,33 @@ export class AppComponent {
         { id: '1', name: 'John', isActive: true },
         { id: '2', name: 'Jack', isActive: true },
         { id: '3', name: 'Mike', isActive: false },
+        { id: '4', name: 'Robert', isActive: true },
+        { id: '5', name: 'Jackson', isActive: false },
+        { id: '6', name: 'Aaron', isActive: true },
     ];
 
     users$ = of(this.users);
     usernames$ = this.users$.pipe(
         map((users) => users.map((user) => user.name))
     );
-
+    //Filter and check if all item on users$ isActive === true, if not dont save the items into filteredUsers$
     filteredUsers$ = this.users$.pipe(
         filter((users) => users.every((user) => user.isActive))
     );
+    //Filter users$ and save the passed values into isActiveFilter$
+    isActiveFilter$ = this.users$
+        .pipe(map((users) => users.filter((user) => user.isActive === true)))
+        .subscribe((response) => {
+            console.log(response);
+        });
+    isActive2Filter$ = this.users$
+        .pipe(
+            concatMap((users) => users),
+            filter((user) => user.isActive === true)
+        )
+        .subscribe((response) => {
+            console.log(response);
+        });
 
     // documentClick$ = fromEvent(document, 'click');
     datas$ = combineLatest([
