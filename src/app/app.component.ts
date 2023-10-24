@@ -17,6 +17,9 @@ import {
     delay,
     startWith,
     timer,
+    from,
+    mergeMap,
+    exhaustMap,
 } from 'rxjs';
 
 @Component({
@@ -106,6 +109,17 @@ export class AppComponent {
         //     console.log('Usernames:', usernames);
         //     console.log('Filtered Users:', filteredUsers);
         // });
+        const example = (operator: any) => () => {
+            from([0, 1, 2, 3, 4])
+                .pipe(operator((x: any) => of(x).pipe(delay(2000))))
+                .subscribe(
+                    console.log,
+                    () => {},
+                    () => console.log(`${operator.name} completed`)
+                );
+        };
+
+        example(exhaustMap)();
     }
 
     // ngOnInit() {
