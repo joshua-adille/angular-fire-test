@@ -1,25 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { debug } from 'console';
 import {
     map,
     of,
     filter,
-    BehaviorSubject,
-    fromEvent,
     combineLatest,
-    tap,
+    concatMap,
     interval,
     take,
-    concatMap,
-    switchMap,
-    delay,
-    startWith,
-    timer,
-    from,
-    mergeMap,
-    exhaustMap,
+    concat,
 } from 'rxjs';
 
 @Component({
@@ -92,11 +82,21 @@ export class AppComponent {
 
     // combined = combineLatest(this.observables);
 
-    firstTimer = timer(0, 1000); // emit 0, 1, 2... after every second, starting from now
-    secondTimer = timer(500, 1000); // emit 0, 1, 2... after every second, starting 0,5s from now
-    combinedTimers = combineLatest([this.firstTimer, this.secondTimer]);
+    // firstTimer = timer(0, 1000); // emit 0, 1, 2... after every second, starting from now
+    // secondTimer = timer(500, 1000); // emit 0, 1, 2... after every second, starting 0,5s from now
+    // combinedTimers = combineLatest([this.firstTimer, this.secondTimer]);
+
+    timer1 = interval(1000).pipe(take(10));
+    timer2 = interval(2000).pipe(take(6));
+    timer3 = interval(500).pipe(take(10));
+
+    result = concat(this.timer1, this.timer2, this.timer3);
+
+    numbers$ = of(1, 2, 3);
 
     constructor() {
+        this.numbers$.subscribe((x) => console.log(x));
+        // this.result.subscribe((x) => console.log(x));
         // this.takeFive.subscribe((x) => console.log(x));
         // this.positions.subscribe((x) => console.log(x));
         // this.result.subscribe((x) => console.log(x));
@@ -109,17 +109,17 @@ export class AppComponent {
         //     console.log('Usernames:', usernames);
         //     console.log('Filtered Users:', filteredUsers);
         // });
-        const example = (operator: any) => () => {
-            from([0, 1, 2, 3, 4])
-                .pipe(operator((x: any) => of(x).pipe(delay(2000))))
-                .subscribe(
-                    console.log,
-                    () => {},
-                    () => console.log(`${operator.name} completed`)
-                );
-        };
-
-        example(exhaustMap)();
+        // ~~~~~~~~~~~~Map Function
+        // const example = (operator: any) => () => {
+        //     from([0, 1, 2, 3, 4])
+        //         .pipe(operator((x: any) => of(x).pipe(delay(2000))))
+        //         .subscribe(
+        //             console.log,
+        //             () => {},
+        //             () => console.log(`${operator.name} completed`)
+        //         );
+        // };
+        // example(exhaustMap)();
     }
 
     // ngOnInit() {

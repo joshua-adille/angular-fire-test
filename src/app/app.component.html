@@ -15,12 +15,14 @@
         {{ user.name }}
     </div>
 </div>
+
+{{ numbers$ | async | json }}
+<br />
 ~~~~~~~~~~~
-<!-- <div *ngFor="let user of isActiveFilter$ | async">
-    {{ user.name }}
+<!-- <div *ngFor="let user of numbers$ | async">
+    {{ user }}
 </div> -->
 
-<!-- {{ isActiveFilter$ | async | json }} -->
 ~~~~~~~~~~~~~<br /><br />
 
 <!-- {{ datas$ | async | json }}
