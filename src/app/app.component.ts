@@ -9,6 +9,13 @@ import {
     fromEvent,
     combineLatest,
     tap,
+    interval,
+    take,
+    concatMap,
+    switchMap,
+    delay,
+    startWith,
+    timer,
 } from 'rxjs';
 
 @Component({
@@ -47,36 +54,43 @@ export class AppComponent {
         }))
     );
 
-    // data$ = combineLatest([
-    //     this.users$,
-    //     this.usernames$,
-    //     this.filteredUsers$,
-    // ]).pipe(
-    //     tap(([users, usernames, filteredUsers]) => {
-    //         debugger;
-    //         console.log('Users:', users);
-    //         console.log('Usernames:', usernames);
-    //         console.log('Filtered Users:', filteredUsers);
-    //     }),
-    //     map(([users, usernames, filteredUsers]) => ({
-    //         users,
-    //         usernames,
-    //         filteredUsers,
-    //     }))
-    // );
-    ngOnInit() {
-        // console.log('data$', this.data$);
-        // this.documentClick$.subscribe((e) => {
-        //     console.log('e', e);
-        // });
-        // setTimeout(() => {
-        //     this.user$.next({ id: '1', name: 'John' });
-        // }, 2000);
-        // this.user$.subscribe((user) => {
-        //     console.log('user', user);
-        // });
-        // this.users$.subscribe((users) => {
-        //     console.log('users', users);
+    // intervalCount = interval(1000);
+    // takeFive = this.intervalCount.pipe(take(5));
+
+    // clicks = fromEvent<PointerEvent>(document, 'click');
+    // positions = this.clicks.pipe(map((ev) => ev.clientX));
+
+    // clicks = fromEvent(document, 'click');
+    // result = this.clicks.pipe(switchMap(() => interval(1000)));
+
+    // observables = {
+    //     a: of(1).pipe(delay(1000), startWith(0)),
+    //     b: of(5).pipe(delay(5000), startWith(0)),
+    //     c: of(10).pipe(delay(10000), startWith(0)),
+    // };
+
+    // combined = combineLatest(this.observables);
+
+    firstTimer = timer(0, 1000); // emit 0, 1, 2... after every second, starting from now
+    secondTimer = timer(500, 1000); // emit 0, 1, 2... after every second, starting 0,5s from now
+    combinedTimers = combineLatest([this.firstTimer, this.secondTimer]);
+
+    constructor() {
+        // this.takeFive.subscribe((x) => console.log(x));
+        // this.positions.subscribe((x) => console.log(x));
+        // this.result.subscribe((x) => console.log(x));
+        // this.combined.subscribe((value) => console.log(value));
+        // this.combinedTimers.subscribe((value) => console.log(value));
+        // this.datas$.subscribe((datas) => console.log('test', datas));
+        // this.datas$.subscribe(([users, usernames, filteredUsers]) => {
+        //     // Here, you can access and work with the combined data
+        //     console.log('Users:', users);
+        //     console.log('Usernames:', usernames);
+        //     console.log('Filtered Users:', filteredUsers);
         // });
     }
+
+    // ngOnInit() {
+
+    // }
 }

@@ -2,7 +2,7 @@
 
 <h1>Hello World</h1>
 
-<!-- <div *ngIf="data$ | async as data">
+<div *ngIf="datas$ | async as data">
     <div *ngFor="let user of data.users">
         {{ user.name }}
     </div>
@@ -14,10 +14,13 @@
     <div *ngFor="let user of data.filteredUsers">
         {{ user.name }}
     </div>
+</div>
+
+<!-- {{ datas$ | async | json }}
+
+<div *ngFor="let user of users$ | async">
+    {{ user.name }}
 </div> -->
-
-{{ datas$ | async | json }}
-
 <!-- <div *ngFor="let user of users$ | async"> -->
 <!-- {{ user.name }} -->
 <!-- </div> -->
