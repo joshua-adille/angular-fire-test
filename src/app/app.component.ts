@@ -9,7 +9,7 @@ import {
 } from '@angular/fire/firestore';
 import { RouterOutlet } from '@angular/router';
 import { DocumentData } from 'rxfire/firestore/interfaces';
-import { Observable } from 'rxjs';
+import { Observable, switchMap, map } from 'rxjs';
 import { SharedService } from './shared.service';
 import { json } from 'stream/consumers';
 
@@ -41,6 +41,22 @@ export class AppComponent {
     ngOnInit() {
         this.refreshNotes();
         this.getCategories();
+        const notes$ = this.service.getNotes();
+        const categories$ = this.service.getCategory();
+        notes$
+            .pipe(
+                switchMap((notes) => {
+                    return categories$.pipe(
+                        map((categories) => {
+                            return {
+                                notes: notes,
+                                categories: categories,
+                            };
+                        })
+                    );
+                })
+            )
+            .subscribe((res) => console.log(res));
     }
 
     addNotes(newNotes: string) {
