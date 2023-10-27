@@ -46,6 +46,26 @@
         </option>
     </select>
 </h3>
+<br /><br />
+<!-- {{ data$ | async | json }} -->
+<!-- ~~~~~~~~~~~~~~~~~~~~ -->
+<!-- ~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- ~~~~~~~~~~~~~~~~~~~~~ -->
+
+<div *ngIf="data$">
+    <h2>Notes</h2>
+    <ul>
+        <li *ngFor="let data of data$.notes">
+            {{ data.description }}
+        </li>
+    </ul>
+    <h2>Categories</h2>
+    <ul>
+        <li *ngFor="let data of data$.categories">
+            {{ data.type }}
+        </li>
+    </ul>
+</div>
 
 <!-- <ng-container *ngFor="let note of notes$ | async">
     {{ note | json }}

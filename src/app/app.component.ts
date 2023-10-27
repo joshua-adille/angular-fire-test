@@ -16,6 +16,7 @@ export class AppComponent {
     notes: any = [];
     category: any = [];
     selectedCategory: string;
+    data$: any = [];
 
     refreshNotes() {
         this.service.getNotes().subscribe((res) => {
@@ -29,9 +30,7 @@ export class AppComponent {
         });
     }
 
-    ngOnInit() {
-        this.refreshNotes();
-        this.getCategories();
+    getData() {
         const notes$ = this.service.getNotes();
         const categories$ = this.service.getCategory();
         notes$
@@ -47,7 +46,24 @@ export class AppComponent {
                     );
                 })
             )
-            .subscribe((res) => console.log(res));
+            .subscribe(
+                (res) => {
+                    this.data$ = res;
+                }
+
+                // console.log(res)
+            );
+    }
+
+    ngOnInit() {
+        this.refreshNotes();
+        this.getCategories();
+        this.getData();
+        // ~~~~~~~~~~~~~~~
+        // ~~~~~~~~~~~~~~~~
+
+        // .subscribe((res) => console.log(res));
+        // this.data$.subscribe((res) => console.log(res));
     }
 
     addNotes(newNotes: string) {
