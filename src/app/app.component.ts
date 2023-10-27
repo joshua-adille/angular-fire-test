@@ -22,7 +22,7 @@ export class AppComponent {
     users = [
         { id: '1', name: 'John', isActive: true },
         { id: '2', name: 'Jack', isActive: true },
-        { id: '3', name: 'Mike', isActive: false },
+        { id: '3', name: 'Mike', isActive: true },
     ];
 
     users$ = of(this.users);
