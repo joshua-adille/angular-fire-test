@@ -16,19 +16,6 @@ export class AppComponent {
     notes: any = [];
     category: any = [];
     selectedCategory: string;
-    data$: any = [];
-
-    refreshNotes() {
-        this.service.getNotes().subscribe((res) => {
-            this.notes = res;
-        });
-    }
-
-    getCategories() {
-        this.service.getCategory().subscribe((res) => {
-            this.category = res;
-        });
-    }
 
     getData() {
         const notes$ = this.service.getNotes();
@@ -48,7 +35,8 @@ export class AppComponent {
             )
             .subscribe(
                 (res) => {
-                    this.data$ = res;
+                    this.notes = res.notes;
+                    this.category = res.categories;
                 }
 
                 // console.log(res)
@@ -56,14 +44,7 @@ export class AppComponent {
     }
 
     ngOnInit() {
-        this.refreshNotes();
-        this.getCategories();
         this.getData();
-        // ~~~~~~~~~~~~~~~
-        // ~~~~~~~~~~~~~~~~
-
-        // .subscribe((res) => console.log(res));
-        // this.data$.subscribe((res) => console.log(res));
     }
 
     addNotes(newNotes: string) {
@@ -71,7 +52,7 @@ export class AppComponent {
             .addNote(newNotes)
             .then((res) => {
                 console.log(res);
-                this.refreshNotes();
+                this.getData();
             })
             .catch((error) => {
                 console.log(`There was an error! ${error}`);
@@ -82,7 +63,7 @@ export class AppComponent {
             .deleteNote(id)
             .then((res) => {
                 console.log(res);
-                this.refreshNotes();
+                this.getData();
             })
             .catch((error) => {
                 console.log(`There was an error! ${error}`);
@@ -94,7 +75,7 @@ export class AppComponent {
             .updateNote(editNotes, id)
             .then((res) => {
                 console.log(res);
-                this.refreshNotes();
+                this.getData();
             })
             .catch((error) => {
                 console.log(`There was an error! ${error}`);
@@ -107,7 +88,7 @@ export class AppComponent {
             .updateCategory(choice, id)
             .then((res) => {
                 console.log(res);
-                this.refreshNotes();
+                this.getData();
             })
             .catch((error) => {
                 console.log(`There was an error! ${error}`);

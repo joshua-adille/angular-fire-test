@@ -38,34 +38,12 @@
         (change)="updateCategories(choice.options[choice.value].text, note.id)"
     >
         <option [value]="" disabled selected>Select Category</option>
-        <!-- <option value="option1">test1</option>
-        <option value="option2">test2</option>
-        <option value="option3">test3</option> -->
         <option *ngFor="let item of category" [value]="item.id">
             {{ item.type }}
         </option>
     </select>
 </h3>
 <br /><br />
-<!-- {{ data$ | async | json }} -->
-<!-- ~~~~~~~~~~~~~~~~~~~~ -->
-<!-- ~~~~~~~~~~~~~~~~~~~~~ -->
-<!-- ~~~~~~~~~~~~~~~~~~~~~ -->
-
-<div *ngIf="data$">
-    <h2>Notes</h2>
-    <ul>
-        <li *ngFor="let data of data$.notes">
-            {{ data.description }}
-        </li>
-    </ul>
-    <h2>Categories</h2>
-    <ul>
-        <li *ngFor="let data of data$.categories">
-            {{ data.type }}
-        </li>
-    </ul>
-</div>
 
 <!-- <ng-container *ngFor="let note of notes$ | async">
     {{ note | json }}
