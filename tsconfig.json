@@ -1,4 +1,5 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
+//Installed firebase-functions in cli and after installation did a npm ci then this error appeared
 {
     "compileOnSave": false,
     "compilerOptions": {
