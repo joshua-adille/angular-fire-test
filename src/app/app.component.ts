@@ -1,17 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
-import {
-    Firestore,
-    collection,
-    collectionData,
-    getDocs,
-    query,
-} from '@angular/fire/firestore';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { DocumentData } from 'rxfire/firestore/interfaces';
-import { Observable, switchMap, map } from 'rxjs';
+import { switchMap, map } from 'rxjs';
 import { SharedService } from './shared.service';
-import { json } from 'stream/consumers';
 
 @Component({
     selector: 'app-root',
